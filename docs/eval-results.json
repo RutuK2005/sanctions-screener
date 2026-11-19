@@ -1,0 +1,204 @@
+{
+  "list": {
+    "sources": [
+      "OFAC_SDN"
+    ],
+    "active_entities": 19595,
+    "names_incl_aliases": 37968
+  },
+  "dataset": {
+    "positives": 1000,
+    "negatives": 1000,
+    "seed": 7
+  },
+  "rescored": [
+    {
+      "threshold": 0.75,
+      "tp": 993,
+      "fp": 226,
+      "fn": 7,
+      "tn": 779,
+      "precision": 0.8146,
+      "recall": 0.993,
+      "f1": 0.895,
+      "negative_alert_rate": 0.221
+    },
+    {
+      "threshold": 0.8,
+      "tp": 990,
+      "fp": 109,
+      "fn": 10,
+      "tn": 893,
+      "precision": 0.9008,
+      "recall": 0.99,
+      "f1": 0.9433,
+      "negative_alert_rate": 0.107
+    },
+    {
+      "threshold": 0.85,
+      "tp": 979,
+      "fp": 48,
+      "fn": 21,
+      "tn": 955,
+      "precision": 0.9533,
+      "recall": 0.979,
+      "f1": 0.966,
+      "negative_alert_rate": 0.045
+    },
+    {
+      "threshold": 0.88,
+      "tp": 968,
+      "fp": 26,
+      "fn": 32,
+      "tn": 977,
+      "precision": 0.9738,
+      "recall": 0.968,
+      "f1": 0.9709,
+      "negative_alert_rate": 0.023
+    },
+    {
+      "threshold": 0.9,
+      "tp": 959,
+      "fp": 20,
+      "fn": 41,
+      "tn": 982,
+      "precision": 0.9796,
+      "recall": 0.959,
+      "f1": 0.9692,
+      "negative_alert_rate": 0.018
+    },
+    {
+      "threshold": 0.92,
+      "tp": 900,
+      "fp": 15,
+      "fn": 100,
+      "tn": 992,
+      "precision": 0.9836,
+      "recall": 0.9,
+      "f1": 0.9399,
+      "negative_alert_rate": 0.008
+    },
+    {
+      "threshold": 0.95,
+      "tp": 838,
+      "fp": 7,
+      "fn": 162,
+      "tn": 997,
+      "precision": 0.9917,
+      "recall": 0.838,
+      "f1": 0.9084,
+      "negative_alert_rate": 0.003
+    }
+  ],
+  "baseline_trigram_only": [
+    {
+      "threshold": 0.3,
+      "tp": 996,
+      "fp": 895,
+      "fn": 4,
+      "tn": 109,
+      "precision": 0.5267,
+      "recall": 0.996,
+      "f1": 0.689,
+      "negative_alert_rate": 0.891
+    },
+    {
+      "threshold": 0.4,
+      "tp": 994,
+      "fp": 817,
+      "fn": 6,
+      "tn": 188,
+      "precision": 0.5489,
+      "recall": 0.994,
+      "f1": 0.7072,
+      "negative_alert_rate": 0.812
+    },
+    {
+      "threshold": 0.5,
+      "tp": 990,
+      "fp": 666,
+      "fn": 10,
+      "tn": 341,
+      "precision": 0.5978,
+      "recall": 0.99,
+      "f1": 0.7455,
+      "negative_alert_rate": 0.659
+    },
+    {
+      "threshold": 0.6,
+      "tp": 954,
+      "fp": 280,
+      "fn": 46,
+      "tn": 730,
+      "precision": 0.7731,
+      "recall": 0.954,
+      "f1": 0.8541,
+      "negative_alert_rate": 0.27
+    },
+    {
+      "threshold": 0.7,
+      "tp": 856,
+      "fp": 70,
+      "fn": 144,
+      "tn": 941,
+      "precision": 0.9244,
+      "recall": 0.856,
+      "f1": 0.8889,
+      "negative_alert_rate": 0.059
+    },
+    {
+      "threshold": 0.8,
+      "tp": 677,
+      "fp": 20,
+      "fn": 323,
+      "tn": 988,
+      "precision": 0.9713,
+      "recall": 0.677,
+      "f1": 0.7979,
+      "negative_alert_rate": 0.012
+    }
+  ],
+  "best_f1_threshold": 0.88,
+  "by_kind_at_best": {
+    "drop_middle": {
+      "n": 68,
+      "recall": 0.9559
+    },
+    "initial": {
+      "n": 78,
+      "recall": 0.9872
+    },
+    "negative_entity": {
+      "n": 260,
+      "alert_rate": 0.0154
+    },
+    "negative_individual": {
+      "n": 740,
+      "alert_rate": 0.0257
+    },
+    "reorder": {
+      "n": 332,
+      "recall": 0.997
+    },
+    "translit": {
+      "n": 275,
+      "recall": 0.96
+    },
+    "typo": {
+      "n": 247,
+      "recall": 0.9352
+    }
+  },
+  "latency_ms": {
+    "n": 2000,
+    "p50": 8.93,
+    "p95": 27.53,
+    "p99": 40.89,
+    "mean": 11.6
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "postgres": "16.13"
+  }
+}

@@ -1,0 +1,59 @@
+list: ['OFAC_SDN'] active entities=19595 names=37968
+dataset: {'positives': 1000, 'negatives': 1000, 'seed': 7}
+
+re-scored matcher
+| threshold | precision | recall | F1 | TP | FP | FN | negative alert rate |
+|---|---|---|---|---|---|---|---|
+| 0.75 | 0.815 | 0.993 | 0.895 | 993 | 226 | 7 | 0.221 |
+| 0.80 | 0.901 | 0.990 | 0.943 | 990 | 109 | 10 | 0.107 |
+| 0.85 | 0.953 | 0.979 | 0.966 | 979 | 48 | 21 | 0.045 |
+| 0.88 | 0.974 | 0.968 | 0.971 | 968 | 26 | 32 | 0.023 |
+| 0.90 | 0.980 | 0.959 | 0.969 | 959 | 20 | 41 | 0.018 |
+| 0.92 | 0.984 | 0.900 | 0.940 | 900 | 15 | 100 | 0.008 |
+| 0.95 | 0.992 | 0.838 | 0.908 | 838 | 7 | 162 | 0.003 |
+
+baseline: raw pg_trgm similarity only
+| 0.30 | 0.527 | 0.996 | 0.689 |
+| 0.40 | 0.549 | 0.994 | 0.707 |
+| 0.50 | 0.598 | 0.990 | 0.746 |
+| 0.60 | 0.773 | 0.954 | 0.854 |
+| 0.70 | 0.924 | 0.856 | 0.889 |
+| 0.80 | 0.971 | 0.677 | 0.798 |
+
+by variant kind at 0.88: {"drop_middle": {"n": 68, "recall": 0.9559}, "initial": {"n": 78, "recall": 0.9872}, "negative_entity": {"n": 260, "alert_rate": 0.0154}, "negative_individual": {"n": 740, "alert_rate": 0.0257}, "reorder": {"n": 332, "recall": 0.997}, "translit": {"n": 275, "recall": 0.96}, "typo": {"n": 247, "recall": 0.9352}}
+latency: {'n': 2000, 'p50': 8.93, 'p95': 27.53, 'p99': 40.89, 'mean': 11.6}
+
+missed positives:
+  [translit] 'Nord Trading L.l.k' <- 'NORD TRADING L.L.C' correct=0.857 top='NORD TRADING L.L.C'
+  [translit] 'S Axis Llc' <- 'Z AXIS LLC' correct=0.833 top='S M A'
+  [typo] 'Aktdsionernoye Obshchestvo Vladivostokskoye Predpriyatie Elektroradioavtimatika' <- 'AKTSIONERNOYE OBSHCHESTVO VLADIVOSTOKSKOYE PREDPRIYATIE ELEKTRORADIOAVTIMATIKA' correct=0.874 top='AKTSIONERNOYE OBSHCHESTVO VLADIVOSTOKSKOYE PREDPRIYATIE ELEKTRORADIOAVTIMATIKA'
+  [translit] 'Lap Shun Li' <- 'LEE, Lap Shun' correct=0.870 top='LEE, Lap Shun'
+  [typo] 'Closed Joirnt Stock Company Erasib' <- 'CLOSED JOINT STOCK COMPANY ERASIB' correct=0.788 top='CLOSED JOINT STOCK COMPANY ERASIB'
+  [drop_middle] 'Chun Ri' <- 'RI, Chun Song' correct=0.870 top='RI, Chun Song'
+  [translit] 'Llk Valtex-st' <- 'LLC VALTEX-ST' correct=0.818 top='LLC VALTEX-ST'
+  [typo] 'Algae Ship Charter - Fkco' <- 'ALGAE SHIP CHARTER - FZCO' correct=0.878 top='ALGAE SHIP CHARTER - FZCO'
+  [typo] 'Maritime Joint Stock Bank Joqint Stock Company' <- 'MARITIME JOINT STOCK BANK JOINT STOCK COMPANY' correct=0.788 top='MARITIME JOINT STOCK BANK JOINT STOCK COMPANY'
+  [reorder] 'De R.l. De C.v. Enlace Forwarding Mexico S.' <- 'ENLACE FORWARDING MEXICO, S. DE R.L. DE C.V.' correct=0.857 top='ENLACE FORWARDING MEXICO, S. DE R.L. DE C.V.'
+  [typo] 'Joint Stcok Company Antares' <- 'JOINT STOCK COMPANY ANTARES' correct=0.708 top='LIMITED LIABILITY COMPANY RESEARCH AND PRODUCTION ENTERPRISE ANTARES'
+  [drop_middle] 'Ki Kim' <- 'KIM, Ki Nam' correct=0.870 top='KIM, Su Gil'
+  [translit] 'Kourf Uo' <- 'KOURF OOO' correct=0.800 top='KOURF OOO'
+  [typo] 'Kodo-eai' <- 'KODO-KAI' correct=0.875 top='KODO-KAI'
+  [typo] 'Sietm' <- 'SITEM' correct=0.000 top='MKT 24 SIETE, S.A. DE C.V.'
+false alerts on negatives:
+  'Carlos Verma' -> 'VERA CALVA, Carlos' 0.880
+  'Dmitri Lebedev' -> 'LEBEDEV, Dmitri Alekseevich' 0.900
+  'Dmitri Rahman' -> 'RAHMANI, Mir Rahman' 0.922
+  'Mia Martin' -> 'MARTIC, Milan' 0.918
+  'Li Young' -> 'LI, Youmin' 0.909
+  'Hui Kim' -> 'KIM, Yon Hui' 0.900
+  'Chloe Young' -> 'JO, Yong Chol' 0.916
+  'Samira Hosseini' -> 'HOSSEINI, Amir' 0.950
+  'Blue Bridge Consulting LLC' -> 'IPM LIMITED' 0.903
+  'Bright Wave Consulting LLC' -> 'IPM LIMITED' 0.954
+  'Pooja Martin' -> 'GUSEV, Denis Igorevich' 0.944
+  'Daniel Yang' -> 'HE, Daniel Y.' 0.910
+  'Summit Stone Solutions PVT LTD' -> 'S&D SOLUTIONS LIMITED LIABILITY COMPANY' 0.900
+  'Lisa Karimi' -> 'KARIMI, Leila' 0.916
+  'Mia Mansour' -> 'MANSURI, Milad' 0.946
+
+wrote docs\eval-results.json
