@@ -1,0 +1,26 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Local Postgres binaries + data (see scripts/localpg.py)
+.pg/
+.pgdl/
+
+# Raw sanctions downloads (large, re-downloadable). Small fixtures live in tests/fixtures/.
+data/raw/
+data/eval/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Node
+web/node_modules/
+web/dist/
+web/coverage/
+*.log

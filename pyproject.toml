@@ -1,0 +1,22 @@
+[project]
+name = "sanctions-screener"
+version = "0.1.0"
+description = "Sanctions screening (OFAC SDN + UN) with fuzzy matching, case workflow and audit log"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["alembic/script.py.mako"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["SIM905", "SIM108", "UP046"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff.lint.isort]
+# The repo has an alembic/ migrations folder; the import refers to the library.
+known-third-party = ["alembic"]
