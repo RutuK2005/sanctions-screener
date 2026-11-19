@@ -1,0 +1,40 @@
+# NOTE: written for convenience but NOT run by the author (Docker was not available
+# on the development machine). The local setup that was actually used is
+# scripts/localpg.py - see README "Run locally".
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: screener
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/screener
+      API_KEY: ${API_KEY:-dev-key}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    ports: ["8000:8000"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # One-off: docker compose run --rm loader   (loads the offline fixture subset;
+  # mount data/raw and use `download` + `ingest-ofac data/raw` for the full lists)
+  loader:
+    build: .
+    profiles: ["tools"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/screener
+    command: >
+      sh -c "alembic upgrade head &&
+             python -m app.cli ingest-ofac tests/fixtures/ofac &&
+             python -m app.cli ingest-un tests/fixtures/un_sample.xml"
+    depends_on:
+      db:
+        condition: service_healthy
