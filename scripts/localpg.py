@@ -1,12 +1,12 @@
 """Run a throwaway PostgreSQL 16 server without Docker or an installer.
 
-Docker is not available on the development machine, so this script drives the
-portable EnterpriseDB Windows binaries (or any `bin/` dir containing initdb +
+I don't have Docker on my dev machine, so this script drives the portable
+EnterpriseDB Windows binaries (or any `bin/` dir containing initdb +
 pg_ctl, e.g. a Linux/macOS install) from a git-ignored `.pg/` folder.
 
     python scripts/localpg.py download   # Windows only: fetch + unzip EDB binaries into .pg/
     python scripts/localpg.py init       # initdb into .pg/data (trust auth, localhost only)
-    python scripts/localpg.py start      # start on 127.0.0.1:54329, create dbs screener + screener_test
+    python scripts/localpg.py start      # start on 127.0.0.1:54329, create screener, screener_test, screener_eval
     python scripts/localpg.py stop
     python scripts/localpg.py status
 

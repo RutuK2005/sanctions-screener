@@ -1,6 +1,5 @@
-# NOTE: written for convenience but NOT run by the author (Docker was not available
-# on the development machine). The local setup that was actually used is
-# scripts/localpg.py - see README "Run locally".
+# Untested: I don't have Docker on my dev machine, so locally I use
+# scripts/localpg.py instead (see README "Running it").
 services:
   db:
     image: postgres:16
